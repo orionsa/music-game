@@ -1,0 +1,308 @@
+/* @import url('https://fonts.googleapis.com/css?family=New+Rocker');
+@import url('https://fonts.googleapis.com/css?family=Metal+Mania'); */
+@import url('https://fonts.googleapis.com/css?family=Boogaloo');
+
+html,body{
+    height: 100%;
+}
+html{
+    font-size: 1rem;
+}
+body{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    background: #EEE5E9;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+button:focus {outline:0;}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    /* font-family: 'New Rocker';
+    font-family: 'Metal Mania'; */
+    font-family: 'Boogaloo';
+}
+.main{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*--------------------*/
+/*----- TopBar -----*/
+.top-bar{
+    width: 100vw;
+    height: 6rem;
+    background-color: rgba(0,0,0,0.75);
+    color: #78ffd6;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    /* padding-bottom: 0.5rem;   */
+}
+.top-bar h1{
+    position: absolute;
+    left: 3rem;
+    top: 1.5rem;
+    font-size: 3.5rem;
+}
+.top-bar h3{
+    font-size: 2rem;
+}
+.links-container{
+    color: #78ffd6;
+    display: flex;
+    justify-content: center;
+}
+.links-item{
+    margin-left: 2.5rem;
+}
+.links-item a:after{
+    display:block;
+    content: '';
+    border-bottom: 2px solid #78ffd6; 
+    transform: scaleX(0);  
+    transition: transform 125ms ease-in-out;
+}
+.links-item a:focus:after{
+    background-color:green;
+    border-bottom: 2px solid #78ffd6;
+    transform: scaleX(1);  
+    transition: transform 125ms ease-in-out;
+} 
+
+/*----- LeaderPopUp Component -----*/
+@keyframes fadeIn {
+    from {opacity: 0}
+    to {opacity :1}
+}
+.popup-outer{
+    opacity: 1;
+    display: inline-block;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    right:0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.75s;
+}
+
+.popup-inner{
+    width: 70%;
+    height: 40%;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgba(238,229,233,0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.popup-inner button{
+    width: 15rem;
+    height: 3.5rem;
+    align-self: center;
+    background: linear-gradient(to bottom, #eb5757, #000000);
+    border: none; 
+    color: #c37171;
+    border-radius: 5px;
+    font-size: 1.25rem;
+}
+.popup-inner button:hover{
+    cursor: pointer;
+    animation: hoverSlide 0.1s forwards;
+}
+.leader{
+    display: flex;
+}
+.leader p{
+    padding-right: 10px;
+}
+
+/*----- Game -----*/
+.game-wraper{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    height: 100vh;
+}
+.game-container{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 10rem;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-color: rgba(0,0,0,0.85) ;
+}
+
+/* .state-qustion{
+    display: block;
+} */
+.question-box{
+    display: flex;
+    width: 100%;
+}
+.answers-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+.answer-item{
+    width: 20rem;
+    height: 2.75rem;
+    border: 1px solid darkblue;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 15px; 
+    opacity: 1;
+    color: #EEE5E9;
+    font-size:1.5rem;
+    /* background-color: #7c7c7c; */
+    /* background: linear-gradient(to bottom, #4b6cb7, #182848); */
+    /* animation: slideIn 2s; */
+    background: linear-gradient(to bottom, #007991, #78ffd6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+@keyframes hoverSlide{
+    to{transform: translate(-5px,-5px)}
+}
+.answer-item:hover{
+    cursor: pointer;
+    background: #78ffd6; 
+    color: #565656;
+    animation: hoverSlide 0.1s forwards;
+}
+.slide-in{
+    opacity: 0;
+    animation: slideIn  1s, fadeIn 1.1s
+}
+.slide-in:nth-child(1){
+    animation-delay: 150ms;   
+}
+.slide-in:nth-child(2){
+    animation-delay: 300ms;
+}
+.slide-in:nth-child(3){
+    animation-delay: 450ms;
+}
+.slide-in:nth-child(4){
+    animation-delay: 600ms;
+}
+.slide-in:nth-child(5){
+    animation-delay: 750ms;
+}
+@keyframes slideIn {
+    from {transform: translateX(10rem)}
+    to {transform: translateX(0)}
+}
+.album-pic{
+    /* width: 350px;
+    height: 350px;  */
+    width: 22rem;
+    height: 22rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 2rem;
+    animation: fadeIn 800ms ease-out;
+    border-radius: 10px;
+}
+.game-state-container{
+    display: flex;
+    justify-content: space-between;
+    color: lightgray;
+}
+.game-state-container p{
+    font-size: 2rem;
+}
+.new-game-btn{
+    width: 30rem;
+    height: 5rem;
+    margin-top: 2rem;
+    border-radius: 10px;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    /* background: linear-gradient(to bottom, #eb5757, #000000); */
+    background-color: rgba(0,0,0,0);
+    border: 3px solid #79f7d7; 
+    color: #79f7d7;
+    
+}
+/* @keyframes enlarge{
+    from{transform: scale(1)}
+    to {transform: scale(1.1)}
+} */
+.new-game-btn:hover{
+    cursor: pointer;
+    animation: hoverSlide 0.1s forwards;
+}
+/*----- HighScore Component -----*/
+.highscore-container{
+    /* position: absolute;
+    top: 10rem;
+    left: 5rem; */
+    display: flex;
+    align-items: center;
+    width: 40rem;
+    height: 6rem;
+    background-color: rgba(0,0,0,0);
+    margin-top: 2rem;
+    justify-content: space-around;
+    font-size: 2rem;
+    color: lightgray;
+}
+
+/*----- Instructions Component -----*/
+.instructions-wraper{
+    height:100vh;
+    width: 100vw;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2rem;
+    background-image: url("https://s3.amazonaws.com/vf-images/wp-content/uploads/2014/05/love-vinyl_sub.png");
+    background-size: cover;
+    background-position: 50% 50%;
+}
+.instructions-main-container{
+    width: 70vw;
+    /* border: 1px solid black; */
+    font-size: 1.5rem;
+    padding: 2rem;
+    background-color: rgba(238,229,233,0.3);
+    border-radius: 7px;
+    animation: fadeIn 1s   
+}
+/*----- GameOver Component -----*/
+.game-over-container{
+    width: 44rem;
+    height: 26rem;
+    background-color: rgba(238,229,233,0.3);
+    border-radius: 5px;
+    font-size: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
