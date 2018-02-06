@@ -1,19 +1,15 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 export default class LeaderPopUp extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
     }
-    render(){
-        console.log('LeaderPopUp')
-        return(
+    render() {
+        return (
             <div className='popup-outer'>
                 <div className='popup-inner'>
-                    <h1 className='popup-header'>New High Score!!!</h1>
-                    <div className='leader'>
-                        <p>Please enter your name</p>
-                        <input className='leader-name' type='text'/>
-                    </div>
+                    <h1 className='popup-header'>New High Score!</h1>
+                    <input className='leader-name' type='text' placeholder='Your Name' />
                     <button onClick={this.props.updateHighScore}>submit</button>
                 </div>
             </div>

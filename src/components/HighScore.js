@@ -5,7 +5,6 @@ export default class HighScore extends Component {
         super(props)
     }
     render() {
-        console.log('props is ', this.props)
         return (
             <div className="highscore-container">
 

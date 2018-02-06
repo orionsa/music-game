@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-// import artists from '../static/data/musicians.json'
-import artists from '../static/data/artists.json'
-import List from './List'
-import GameOver from './GameOver'
-import HighScore from './HighScore'
-import LeaderPopUp from './LeaderPopup'
+import artists from '../static/data/artists.json';
+import List from './List';
+import GameOver from './GameOver';
+import HighScore from './HighScore';
+import LeaderPopUp from './LeaderPopup';
 
-let numberOfRounds = 3;
+let numberOfRounds = 10;
 
 export default class Game extends Component {
     constructor(props) {
@@ -18,6 +17,7 @@ export default class Game extends Component {
             answers: [],
             score: 0,
             round: 0,
+            try: 1,
             highScore: {
                 name: 'No One',
                 score: 0
@@ -31,27 +31,18 @@ export default class Game extends Component {
         this.updateHighScore = this.updateHighScore.bind(this)
     }
     componentWillMount() {
-        console.log('component will mount check');
-        console.log('this.get.album', this.getAlbum());
-        // console.log('answers', this.answers()) 
+        this.getAlbum()
     }
-    getRandomArtist() {
-        //console.log('getRandomArtist check', Object.keys(artists).length)
+    getRandomArtist() {// Fetch random artist from artists data
         let ran = Math.floor(Math.random() * (Object.keys(artists).length));
-        //console.log('ran', Object.values(artists)[ran])
-        //return artists[ran]
         let randomArtist = {
             name: Object.keys(artists)[ran],
             id: Object.values(artists)[ran]
         }
-        //console.log('randomArtist',randomArtist)
-        //return Object.values(artists)[ran]
         return randomArtist
     }
-    getAlbum() {
+    getAlbum() { //fetch album from iTunes API by artist id
         let artist = this.getRandomArtist()
-        //console.log('get album artist is', artist.name)
-        //fetch(`https://itunes.apple.com/search?parameterkeyvalue&media=music&entity=album&term=${artist}`)
         fetch(`https://itunes.apple.com/lookup?id=${artist.id}&entity=album`)
             .then(res => { return res.json() })
             .then(data => {
@@ -62,47 +53,31 @@ export default class Game extends Component {
                     albumName: data.results[ran].collectionName,
                     albumPic: data.results[ran].artworkUrl100.replace('100x100', '400x400')
                 }, () => {
-                    console.log('this.answers', this.answers())
                     this.setState({ answers: this.answers(), round: this.state.round + 1 }, () => console.log('this.state', this.state, this.state.round))
                 })
             })
     }
-    answers() {
-        //console.log('check answers')
+    answers() { //Sets an array of random answers and set the correct answer in a random place
         let arr = []
-        //arr.push(this.state.currentArtist);
         let i = 1
         while (i < 5) {
             let ranArtist = this.getRandomArtist().name
-            // if (ranArtist===this.state.currentArtist){
-            //     i= i-1;
-            // }
-            // else {
-            //     arr.push(ranArtist)
-            // }
             if (!(ranArtist === this.state.currentArtist) && !(arr.includes(ranArtist))) {
-                //console.log('ranArtist ' , ranArtist);
                 arr.push(ranArtist)
                 i++
             }
         }
-        //console.log('arr inside answers check', arr)
         let ran = Math.floor(Math.random() * 5) + 1
-        //arr[ran] = this.state.currentArtist; 
         arr.splice(ran, 0, this.state.currentArtist)
-        //console.log('arr inside answers check 1', arr)
         return arr
     }
-    updateScore(score) {
-        //console.log('updateScore check');
+    updateScore(score) {//Updates the score state, passed to the List component as props and being called from it
         this.setState({ score: this.state.score + score })
     }
-    newGame() {
-        // console.log('New Game')
+    newGame() {// Initializing round and score state and fetch new album for a new game
         this.setState({ round: 0, score: 0 }, () => this.getAlbum())
     }
-    updateHighScore() {
-        console.log('updateHighScore check')
+    updateHighScore() {//getting the highscore holders name, passed as a props to the LeaderPopUp component and called from it  
         this.setState({
             highScore: {
                 name: document.querySelector('.leader-name').value,
@@ -110,16 +85,15 @@ export default class Game extends Component {
             }
         })
     }
-
     render() {
         return (
-            <div className='game-wraper' style={{ backgroundImage:`url(${this.state.albumPic})` }}>
+            <div className='game-wraper' style={{ backgroundImage: `url(${this.state.albumPic})` }}>
                 <div className="game-container" >
                     {this.state.round <= numberOfRounds &&
                         <div className="state-qustion">
                             <div className="game-state-container">
-                                <p>score: {this.state.score}</p>
-                                <p>Question {this.state.round}/{numberOfRounds}</p>
+                                <p>Score: {this.state.score}</p>
+                                <p>Question: {this.state.round}/{numberOfRounds}</p>
                             </div>
                             <div className="question-box">
                                 <div className="album-pic" style={{ backgroundImage: `url(${this.state.albumPic})` }} ></div>
@@ -128,8 +102,8 @@ export default class Game extends Component {
                             </div>
                         </div>
                     }
-                    {this.state.round > numberOfRounds && <GameOver />}
-                    {this.state.highScore.score>0 && this.state.round < numberOfRounds && <HighScore highScore={this.state.highScore} />}
+                    {this.state.round > numberOfRounds && this.state.score <= this.state.highScore.score && <GameOver />}
+                    {this.state.highScore.score > 0 && this.state.round < numberOfRounds && <HighScore highScore={this.state.highScore} />}
                     {this.state.round > numberOfRounds && this.state.score > this.state.highScore.score && <LeaderPopUp updateHighScore={this.updateHighScore} />}
                     <button className="new-game-btn" onClick={this.newGame}>New Game</button>
                 </div>
@@ -137,6 +111,3 @@ export default class Game extends Component {
         )
     }
 }
-
-
-
