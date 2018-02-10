@@ -10,7 +10,6 @@ body{
     display:flex;
     justify-content:center;
     align-items: center;
-    background: #EEE5E9;
     overflow: hidden;
 }
 a {
@@ -270,7 +269,6 @@ button:focus {outline:0;}
 .instructions-wraper{
     height:100vh;
     width: 100vw;
-    background-color: red;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -363,8 +361,6 @@ button:focus {outline:0;}
         position: absolute;
         top: 0rem; 
         left: 0;
-        /* width: 100vw;
-        height: 100vh; */
         padding: 4rem;
         overflow: hidden;
     }
@@ -436,4 +432,4 @@ button:focus {outline:0;}
         animation: none;
         color:#c37171
     }
-  } /*end of media query*/
+  }
