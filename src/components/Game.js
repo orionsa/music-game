@@ -47,13 +47,12 @@ export default class Game extends Component {
             .then(res => { return res.json() })
             .then(data => {
                 let ran = Math.floor(Math.random() * ((data.results.length - 1) + 1)) + 0;
-                console.log('data[ran]', data.results[ran])
                 this.setState({
                     currentArtist: data.results[ran].artistName,
                     albumName: data.results[ran].collectionName,
                     albumPic: data.results[ran].artworkUrl100.replace('100x100', '400x400')
                 }, () => {
-                    this.setState({ answers: this.answers(), round: this.state.round + 1 }, () => console.log('this.state', this.state, this.state.round))
+                    this.setState({ answers: this.answers(), round: this.state.round + 1 })
                 })
             })
     }
@@ -90,7 +89,7 @@ export default class Game extends Component {
             <div className='game-wraper' style={{ backgroundImage: `url(${this.state.albumPic})` }}>
                 <div className="game-container" >
                     {this.state.round <= numberOfRounds &&
-                        <div className="state-qustion">
+                        <div className="state-question">
                             <div className="game-state-container">
                                 <p>Score: {this.state.score}</p>
                                 <p>Question: {this.state.round}/{numberOfRounds}</p>

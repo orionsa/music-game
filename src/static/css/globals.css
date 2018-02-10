@@ -11,6 +11,7 @@ body{
     justify-content:center;
     align-items: center;
     background: #EEE5E9;
+    overflow: hidden;
 }
 a {
     text-decoration: none;
@@ -309,3 +310,130 @@ button:focus {outline:0;}
     from {transform: scale(4) rotateZ(-70deg);opacity: 0}
     to {transform: scale(1) rotateZ(-20deg); opacity: 1}
 }
+
+
+/*----- Mobile CSS -----*/
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) {
+/*----- TopBar Mobile -----*/
+     .top-bar{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         width: 100vw;
+         flex-direction: column;
+         height: 4rem;
+         z-index: 1;
+     }
+     .top-bar h3 {
+         font-size: 1rem;
+     }
+     .links-container {
+         align-self: flex-end;
+         width: 100vw;
+         justify-content: space-around;
+         padding-left: 3rem;
+         padding-right: 3rem;
+     }
+     .links-item{
+        margin-left: 0;
+    }
+     .top-bar h1 {
+         font-size: 1.5rem;
+         position: unset;
+     }
+/*----- Instructions Mobile ------*/
+    .instructions-main-container{
+        height: calc(100vh - 5rem);
+        font-size: 1.5rem;
+        position: fixed;
+        top: 4.25rem;
+        overflow-y: scroll;
+    }
+    .instructions-main-container h1{
+        font-size: 2rem;
+    }
+/*----- Game Mobile -----*/
+    .game-wraper{
+        width: 100vw;
+        height: 100vh;
+    }
+    .game-container{
+        position: absolute;
+        top: 0rem; 
+        left: 0;
+        /* width: 100vw;
+        height: 100vh; */
+        padding: 4rem;
+        overflow: hidden;
+    }
+    .question-box{
+        flex-direction: column;
+        align-items: center;
+    }
+    .answer-item{
+        width: 17rem;
+        height: 1.25rem;
+        font-size: 0.75rem;
+        margin-top: 0.10rem;
+    }
+    .list-wraper p{
+        font-size: 0.75rem;
+    }
+    .game-state-container p{
+        font-size: 0.75rem;
+    }
+    .album-pic{
+        width: 12rem;
+        height: 12rem;
+        margin: 0;
+    }
+    .highscore-container{
+        width: 100vw;
+        height: 3rem;
+        font-size: 0.75rem;
+    }
+    .new-game-btn{
+        width: 70vw;
+        height: 2.5rem;
+        margin-bottom: -0.5rem;
+        font-size: 1rem;
+    }
+    .new-game-btn:hover{
+        cursor: none;
+        animation: none;
+    }
+    .answer-item:hover{
+        cursor: none;
+        background: linear-gradient(to bottom, #007991, #78ffd6);; 
+        color: #EEE5E9;
+        animation: none;
+    }
+/*----- GameOver  Mobile -----*/
+    .game-over-container{
+        width: 20rem;
+        height: 15rem;
+        font-size: 3rem;
+        margin-top: 8rem;
+    }
+/*----- LeaderPopUp Mobile -----*/
+    .popup-inner {
+        font-size: 1.25rem;
+        background-size: contain;
+    }
+    .popup-inner input{
+        width: 70%;
+        font-size: 1.25rem;
+    }
+    .popup-inner button{
+        width: 70%;
+        height: 2rem;
+        font-size: 1.25rem;
+    }
+    .popup-inner button:hover{
+        cursor: none;
+        animation: none;
+        color:#c37171
+    }
+  } /*end of media query*/
